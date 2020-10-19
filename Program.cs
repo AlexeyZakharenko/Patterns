@@ -8,7 +8,9 @@ namespace Patterns
         static void Main(string[] args)
         {
             List<IPattern> patterns = new List<IPattern>{
-                new Visitor.Example()
+                new Visitor.Example(),
+                new Decorator.Example()
+
             };
 
             foreach (var pattern in patterns)

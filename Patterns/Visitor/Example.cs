@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace Patterns.Visitor{
+namespace Visitor{
 
     // Паттерн позволяет добавлять методы к классам, закрытым от изменения, но реализщующим интерфейс обработки посещения:
     // умеющим вызывать свой интерфейсный метод из набора методов посетителя
     // Посетителей может быть несколько, каждый реализует свой функционал
     // Плюсы: можно проходить по обобщенным коллекциям, вызывая метод
 
-    public class Example : IPattern 
+    public class Example : Patterns.IPattern 
     {
         public string Name { get => "Visitor"; } 
 
@@ -24,7 +24,7 @@ namespace Patterns.Visitor{
             Console.WriteLine("Extend animals for say");
 
             // Объявляем посетителя, содержащего методы, реализующие конкретную логику для всех объектов
-            // Например, способность издавать  звуки
+            // Например, способность издавать звуки
 
             IVisitor say = new Say();
 
@@ -33,13 +33,17 @@ namespace Patterns.Visitor{
                 animal.Accept(say);             
 
 
-            Console.WriteLine("Extend animals for scare");
+            Console.WriteLine("Extend cretures for scare");
 
-            // Пример вызова другой догики
+            // Пример вызова другой догики с добавлением 
+            List<IComponent> creatures = animals.ConvertAll<IComponent>(a => a as IComponent);
+
+            creatures.Add(new Human());
+
             IVisitor scare = new Scare();
 
-            foreach(var animal in animals)
-                animal.Accept(scare);             
+            foreach(var creature in creatures)
+                creature.Accept(scare);             
 
         }
 

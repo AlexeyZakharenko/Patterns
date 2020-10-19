@@ -1,6 +1,5 @@
-namespace Patterns.Visitor{
 
-
+namespace Visitor{
     
     // Интерфейс, котоорый должен быть реализован в классе каждого расширяемого объекта
     // Позволяет принять посетителя, реализующий определенный функционал
@@ -23,6 +22,8 @@ namespace Patterns.Visitor{
 
     }
 
+
+    // Более другой компонент
     public class Dog: Animal, IComponent {
 
         public override string Name { get => "Dog"; }
@@ -34,13 +35,23 @@ namespace Patterns.Visitor{
 
     }
 
-    // Общий родитель. Служит для демонстрации того,
+    // Общий родитель предыдущих классов. Служит для демонстрации того,
     // как паттерн работает, когда используются перегруженные функции реализации интерфейса
     public abstract class Animal: IComponent {
 
         public virtual string Name { get => "Animal"; }
 
         public abstract void Accept(IVisitor visitor);
+
+    }
+
+
+    // Компонент, не унаследованный от Animal, но также расширяемый посетителем
+    public class Human: IComponent
+    {
+        public void Accept(IVisitor visitor){
+            visitor.Visit(this);
+        }
 
     }
 

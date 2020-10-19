@@ -1,6 +1,6 @@
 using System;
 
-namespace Patterns.Visitor {
+namespace Visitor {
 
     // Интерфейс, содержит сигнатуры "посещающих" методов для всех обрабатываемых классов
     public interface IVisitor {
@@ -11,6 +11,8 @@ namespace Patterns.Visitor {
         public void Visit(Cat cat);
 
         public void Visit(Dog dog);
+
+        public void Visit(Human human);
 
     }
 
@@ -29,6 +31,11 @@ namespace Patterns.Visitor {
             Console.WriteLine($"{dog.Name} barks");
         }
 
+        public void Visit(Human human)
+        {
+            Console.WriteLine($"Human says 'Hello'");
+        }
+
     }
 
     public class Scare : IVisitor{
@@ -41,6 +48,11 @@ namespace Patterns.Visitor {
         public void Visit(Dog dog)
         {
             Console.WriteLine($"{dog.Name} runs away");
+        }
+
+        public void Visit(Human human)
+        {
+            Console.WriteLine($"Human screamed");
         }
 
     }
